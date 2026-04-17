@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBHT - Circular Biological & Hybrid Transformation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --accent-color: #22c55e; --glass-bg: rgba(15, 23, 42, 0.9); }
+        body { background-color: #0f172a; color: #f8fafc; font-family: 'Inter', sans-serif; scroll-behavior: smooth; margin: 0; }
+        section { min-height: 100vh; display: flex; align-items: flex-start; justify-content: center; padding: 40px 5% 120px 5%; position: relative; background-size: cover; background-position: center; background-attachment: fixed; }
+        section::before { content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(180deg, rgba(15, 23, 42, 0.7) 0%, rgba(15, 23, 42, 0.95) 100%); z-index: 1; }
+        .glass-card { background: var(--glass-bg); backdrop-filter: blur(15px); padding: 2rem; border-radius: 24px; max-width: 1000px; width: 100%; border: 1px solid rgba(255, 255, 255, 0.1); z-index: 2; margin-top: 20px; }
+        .bottom-nav { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; display: flex; gap: 8px; background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(20px); padding: 10px; border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.2); width: 95%; max-width: 700px; justify-content: space-around; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: 0.3s; color: white; opacity: 0.4; flex: 1; }
+        .nav-item i { font-size: 1rem; }
+        .nav-label { font-size: 8px; font-weight: bold; text-transform: uppercase; margin-top: 4px; display: none; }
+        .nav-item.active { opacity: 1; color: var(--accent-color); }
+        .nav-item.active .nav-label { display: block; }
+        .title-accent { background: linear-gradient(90deg, #4ade80, #22c55e); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .arabic { font-family: 'Scheherazade New', serif; font-size: 1.6rem; line-height: 1.2; }
+        .phase-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 20px; transition: 0.3s; }
+        .phase-card:hover { border-color: var(--accent-color); background: rgba(34, 197, 94, 0.05); }
+        .output-item { background: rgba(255,255,255,0.05); padding: 12px 16px; border-radius: 12px; display: flex; align-items: center; gap: 12px; border: 1px solid rgba(255,255,255,0.1); }
+        .calc-input { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 12px; width: 100%; color: white; outline: none; transition: 0.3s; }
+        .calc-input:focus { border-color: var(--accent-color); background: rgba(34, 197, 94, 0.05); }
+        .result-box { background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(21, 128, 61, 0.2)); border: 1px solid var(--accent-color); border-radius: 16px; padding: 20px; text-align: center; }
+        
+        /* Bingkai Proses Baru */
+        .process-box { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; padding: 1.5rem; transition: 0.4s; margin-bottom: 2rem; }
+        .process-box:hover { border-color: rgba(34, 197, 94, 0.4); background: rgba(34, 197, 94, 0.03); }
+        .tech-img-framed { width: 100%; border-radius: 12px; margin-top: 1.2rem; border: 1px solid rgba(255, 255, 255, 0.1); }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="bottom-nav">
+        <div class="nav-item active" onclick="navTo('home')"><i class="fas fa-home"></i><span class="nav-label">Visi</span></div>
+        <div class="nav-item" onclick="navTo('roadmap')"><i class="fas fa-map-signs"></i><span class="nav-label">Roadmap</span></div>
+        <div class="nav-item" onclick="navTo('teknis')"><i class="fas fa-tools"></i><span class="nav-label">Teknis</span></div>
+        <div class="nav-item" onclick="navTo('produk')"><i class="fas fa-cube"></i><span class="nav-label">Output</span></div>
+        <div class="nav-item" onclick="navTo('investasi')"><i class="fas fa-handshake"></i><span class="nav-label">Mulai</span></div>
+        <div class="nav-item" onclick="navTo('kalkulator')"><i class="fas fa-calculator"></i><span class="nav-label">Hitung</span></div>
+    </nav>
+
+    <main>
+        <section id="home" style="background-image: url('https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?q=80&w=1000');">
+            <div class="glass-card text-center">
+                <div class="arabic text-green-500 mb-8">السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ</div>
+                <div class="flex flex-col gap-2 mb-8 items-center">
+                    <h2 class="text-2xl md:text-3xl font-black title-accent uppercase tracking-wider">Circular Biological & Hybrid Transformation</h2>
+                </div>
+                <h1 class="text-3xl md:text-5xl font-black mb-6 leading-tight">Membangun <span class="title-accent">Kedaulatan Desa</span> Melalui Transformasi Limbah.</h1>
+                <p class="text-sm md:text-base opacity-90 leading-relaxed max-w-2xl mx-auto italic">
+                    "Kami menjembatani ekosistem biologis dan rekayasa material untuk menciptakan masa depan tanpa sisa."
+                </p>
+            </div>
+        </section>
+
+        <section id="roadmap">
+            <div class="glass-card">
+                <div class="mb-10 border-l-4 border-green-500 pl-4">
+                    <h2 class="text-2xl font-black uppercase tracking-wider">Strategic Roadmap</h2>
+                    <p class="text-xs text-green-400 font-bold mt-1">Filosofi Lembaga:</p>
+                    <p class="text-xs opacity-70 italic leading-relaxed">Sinergi proses <strong>Biological</strong> dan <strong>Hybrid Transformation</strong>.</p>
+                </div>
+                <div class="grid gap-6 md:grid-cols-2">
+                    <div class="phase-card">
+                        <h4 class="font-bold text-sm uppercase text-green-400 mb-2">Phase: Liquidity & Ecosystem</h4>
+                        <p class="text-[11px] opacity-80 leading-relaxed">Optimalisasi pakan bebek, budidaya lele, dan manajemen aset anorganik.</p>
+                    </div>
+                    <div class="phase-card">
+                        <h4 class="font-bold text-sm uppercase text-orange-400 mb-2">Phase: Primary Plastic Engineering</h4>
+                        <p class="text-[11px] opacity-80 leading-relaxed">Manufaktur bata plastik dengan energi mandiri biogas.</p>
+                    </div>
+                    <div class="phase-card">
+                        <h4 class="font-bold text-sm uppercase text-blue-400 mb-2">Phase: Hybrid Manufacturing</h4>
+                        <p class="text-[11px] opacity-80 leading-relaxed">Produksi Tandon Air Baja-Polimer untuk irigasi mitra.</p>
+                    </div>
+                    <div class="phase-card">
+                        <h4 class="font-bold text-sm uppercase text-yellow-400 mb-2">Phase: Future Material Innovation</h4>
+                        <p class="text-[11px] opacity-80 leading-relaxed">Riset atap polimer transparan dan fotoluminesensi.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="teknis" style="background-image: url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=1000');">
+            <div class="glass-card">
+                <h2 class="text-2xl font-black mb-10 border-b border-green-500/30 pb-4 text-center uppercase tracking-wider">Panduan Teknis Produksi</h2>
+                
+                <div class="space-y-12">
+                    <div>
+                        <h3 class="font-bold text-green-400 flex items-center gap-2 text-xl mb-6 uppercase tracking-widest"><i class="fas fa-leaf"></i> LINI BIOLOGIS</h3>
+                        
+                        <div class="process-box">
+                            <h4 class="text-sm font-bold text-green-300 uppercase mb-2">1. Proses Pakan Organik</h4>
+                            <p class="text-[11px] opacity-80 leading-relaxed">Pencacahan limbah organik → Fermentasi bakteri pengurai → Pakan ternak berkualitas tinggi.</p>
+                            <img src="proses-pakan.png" alt="Proses Pakan" class="tech-img-framed">
+                        </div>
+
+                        <div class="process-box">
+                            <h4 class="text-sm font-bold text-green-300 uppercase mb-2">2. Siklus Mandiri Ekosistem</h4>
+                            <p class="text-[11px] opacity-80 leading-relaxed">Kotoran ternak → Stimulasi plankton alami → Pakan lele organik (Reduksi biaya pakan 80%).</p>
+                            <img src="siklus-mandiri.png" alt="Siklus Mandiri" class="tech-img-framed">
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-blue-400 flex items-center gap-2 text-xl mb-6 uppercase tracking-widest"><i class="fas fa-recycle"></i> LINI MANUFAKTUR</h3>
+                        
+                        <div class="process-box">
+                            <h4 class="text-sm font-bold text-blue-300 uppercase mb-2">3. Rekayasa Bata Plastik</h4>
+                            <p class="text-[11px] opacity-80 leading-relaxed">Pelelehan polimer kresek + Pasir agregat (Rasio 1:3) → Kompresi menggunakan cetakan manual.</p>
+                            <img src="proses-bata-plastik.png" alt="Bata Plastik" class="tech-img-framed">
+                        </div>
+
+                        <div class="process-box">
+                            <h4 class="text-sm font-bold text-blue-300 uppercase mb-2">4. Tandon Baja-Polimer Hybrid</h4>
+                            <p class="text-[11px] opacity-80 leading-relaxed">Pemasangan struktur kawat baja di antara dua cetakan presisi → Injeksi polimer leleh PP/HDPE.</p>
+                            <img src="proses-produksi-tandon-baja-polimer.png" alt="Tandon Baja" class="tech-img-framed">
+                        </div>
+
+                        <div class="process-box">
+                            <h4 class="text-sm font-bold text-yellow-300 uppercase mb-2">5. Inovasi Atap Fotoluminesensi</h4>
+                            <p class="text-[11px] opacity-80 leading-relaxed text-center italic mb-2">Future Innovation Program</p>
+                            <p class="text-[11px] opacity-80 leading-relaxed">Pelelehan botol PET bening + Pigmen Strontium → Pencetakan plat gelombang (Glow in the dark).</p>
+                            <img src="proses-atap-glow.png" alt="Atap Glow" class="tech-img-framed">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="produk" style="background-image: url('https://images.unsplash.com/photo-1591193022657-399ba6867bd7?q=80&w=1000');">
+            <div class="glass-card">
+                <h2 class="text-2xl font-black mb-8 text-center uppercase tracking-widest">Output Ekosistem</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="output-item"><i class="fas fa-fish text-blue-400"></i><span class="text-xs font-bold uppercase tracking-tighter">Ikan Lele Organik</span></div>
+                    <div class="output-item"><i class="fas fa-egg text-yellow-400"></i><span class="text-xs font-bold uppercase tracking-tighter">Ternak Bebek Mandiri</span></div>
+                    <div class="output-item"><i class="fas fa-th-large text-orange-400"></i><span class="text-xs font-bold uppercase tracking-tighter">Bata Plastik Konstruksi</span></div>
+                    <div class="output-item"><i class="fas fa-faucet text-green-400"></i><span class="text-xs font-bold uppercase tracking-tighter">Tandon Baja-Polimer</span></div>
+                    <div class="output-item"><i class="fas fa-lightbulb text-yellow-200"></i><span class="text-xs font-bold uppercase tracking-tighter">Atap Fotoluminesensi</span></div>
+                    <div class="output-item"><i class="fas fa-fire text-red-400"></i><span class="text-xs font-bold uppercase tracking-tighter">Energi Biogas Bersih</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="investasi">
+            <div class="glass-card text-center">
+                <h2 class="text-3xl font-black mb-6 leading-tight uppercase">Masa Depan Tanpa Sisa.</h2>
+                <p class="text-sm opacity-80 max-w-xl mx-auto mb-10 leading-relaxed">
+                    Sistem ini membuktikan bahwa limbah bukan akhir dari segalanya, melainkan awal dari kedaulatan pangan dan kemandirian material.
+                </p>
+                <div class="arabic text-green-500 mt-6">السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ</div>
+            </div>
+        </section>
+
+        <section id="kalkulator" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000');">
+            <div class="glass-card">
+                <h2 class="text-2xl font-black mb-8 border-b border-green-500/30 pb-2 uppercase tracking-wider text-center">Kalkulator Iuran Investasi</h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="space-y-5">
+                        <div>
+                            <label class="text-[10px] font-bold uppercase tracking-widest text-green-400 block mb-2">Modal Awal Kesepakatan (Rp)</label>
+                            <input type="number" id="modalAwal" class="calc-input" value="2000000" oninput="updateCalc()">
+                        </div>
+                        <div>
+                            <label class="text-[10px] font-bold uppercase tracking-widest text-green-400 block mb-2">Jumlah Anggota (Orang)</label>
+                            <input type="number" id="jmlAnggota" class="calc-input" value="1" oninput="updateCalc()">
+                        </div>
+                        <div>
+                            <label class="text-[10px] font-bold uppercase tracking-widest text-blue-400 block mb-2">Dana Tambahan / Investor (Optional)</label>
+                            <input type="number" id="danaTambahan" class="calc-input" value="0" oninput="updateCalc()">
+                        </div>
+                    </div>
+                    <div class="flex flex-col justify-center">
+                        <div class="result-box">
+                            <p class="text-[10px] font-bold uppercase tracking-widest opacity-70 mb-2">Estimasi Iuran Per Orang</p>
+                            <h3 id="hasilIuran" class="text-3xl md:text-4xl font-black text-green-400 tracking-tighter">Rp 2.000.000</h3>
+                            <div class="mt-4 pt-4 border-t border-white/10">
+                                <p class="text-[9px] opacity-50 italic">Total Modal: <span id="totalModalLabel">Rp 2.000.000</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function navTo(id) { document.getElementById(id).scrollIntoView({ behavior: 'smooth' }); }
+
+        function updateCalc() {
+            const modalAwal = parseFloat(document.getElementById('modalAwal').value) || 0;
+            const jmlAnggota = parseFloat(document.getElementById('jmlAnggota').value) || 1;
+            const danaTambahan = parseFloat(document.getElementById('danaTambahan').value) || 0;
+            const totalModal = modalAwal + danaTambahan;
+            const perOrang = totalModal / (jmlAnggota > 0 ? jmlAnggota : 1);
+            const formatter = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 });
+            document.getElementById('hasilIuran').innerText = formatter.format(perOrang).replace("IDR", "Rp");
+            document.getElementById('totalModalLabel').innerText = formatter.format(totalModal).replace("IDR", "Rp");
+        }
+
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navItems = document.querySelectorAll('.nav-item');
+            let current = '';
+            sections.forEach(section => { if (pageYOffset >= section.offsetTop - 150) current = section.getAttribute('id'); });
+            navItems.forEach((item, index) => {
+                item.classList.remove('active');
+                if (sections[index] && sections[index].id === current) item.classList.add('active');
+            });
+        });
+
+        window.onload = updateCalc;
+    </script>
+</body>
+</html>
