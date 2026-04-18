@@ -10,9 +10,8 @@
         :root { --accent-color: #22c55e; --glass-bg: rgba(15, 23, 42, 0.95); --text-primary: #f8fafc; --body-bg: #0f172a; }
         .light-theme { --glass-bg: rgba(255, 255, 255, 0.95); --text-primary: #0f172a; --body-bg: #f1f5f9; }
 
-        body { background-color: var(--body-bg); color: var(--text-primary); font-family: 'Inter', sans-serif; scroll-behavior: smooth; margin: 0; transition: background 0.3s; position: relative; z-index: 0; }
+        body { background-color: var(--body-bg); color: var(--text-primary); font-family: 'Inter', sans-serif; scroll-behavior: smooth; margin: 0; transition: background 0.3s; }
         
-        /* Fix Background Mobile */
         section { min-height: 100vh; display: flex; align-items: flex-start; justify-content: center; padding: 40px 5% 120px 5%; position: relative; background-size: cover; background-position: center; background-attachment: scroll; }
         @media (min-width: 1024px) { section { background-attachment: fixed; } }
 
@@ -43,8 +42,7 @@
         .arabic { font-family: 'Scheherazade New', serif; font-size: 1.6rem; line-height: 1.2; }
         .phase-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 20px; transition: 0.3s; }
         .output-item { background: rgba(255,255,255,0.05); padding: 12px 16px; border-radius: 12px; display: flex; align-items: center; gap: 12px; border: 1px solid rgba(255,255,255,0.1); }
-        .calc-input { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 12px; width: 100%; color: var(--text-primary); outline: none; transition: 0.3s; }
-        .calc-input:focus { border-color: var(--accent-color); }
+        .calc-input { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 12px; width: 100%; color: var(--text-primary); outline: none; }
         .result-box { background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(21, 128, 61, 0.2)); border: 1px solid var(--accent-color); border-radius: 16px; padding: 20px; text-align: center; }
         .process-box { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; padding: 1.5rem; margin-bottom: 2rem; }
         .tech-img-framed { width: 100%; border-radius: 12px; margin-top: 1.2rem; border: 1px solid rgba(255, 255, 255, 0.1); }
@@ -58,9 +56,17 @@
             <i class="fas fa-layer-group"></i>
         </button>
         <div class="vertical-dropdown" id="iconDropdown">
-            <a href="#link-ikan" class="grid-item"><i class="fas fa-fish text-blue-400"></i></a>
-            <a href="#link-unggas" class="grid-item"><i class="fas fa-kiwi-bird text-yellow-500"></i></a>
-            <div class="grid-item cursor-pointer" onclick="toggleThemeMode(event)">
+            <a href="index.html" class="grid-item" title="Halaman Utama">
+                <i class="fas fa-house-chimney text-emerald-400"></i>
+            </a>
+            <hr class="border-white/10 my-1">
+            <a href="ikan.html" class="grid-item" title="Budidaya Ikan">
+                <i class="fas fa-fish text-blue-400"></i>
+            </a>
+            <a href="unggas.html" class="grid-item" title="Budidaya Unggas">
+                <i class="fas fa-kiwi-bird text-yellow-500"></i>
+            </a>
+            <div class="grid-item cursor-pointer" onclick="toggleThemeMode(event)" title="Ganti Tema">
                 <i id="themeIcon" class="fas fa-moon text-yellow-200"></i>
             </div>
         </div>
@@ -148,7 +154,6 @@
                         </div>
                         <div class="process-box">
                             <h4 class="text-sm font-bold text-yellow-300 uppercase mb-2">5. Inovasi Atap Fotoluminesensi</h4>
-                            <p class="text-[11px] opacity-80 leading-relaxed text-center italic mb-2">Future Innovation Program</p>
                             <p class="text-[11px] opacity-80 leading-relaxed">Pelelehan botol PET bening + Pigmen Strontium → Pencetakan plat gelombang (Glow in the dark).</p>
                             <img src="proses-atap-glow.png" alt="Atap Glow" class="tech-img-framed">
                         </div>
@@ -232,20 +237,26 @@
             } else {
                 icon.className = 'fas fa-moon text-yellow-200';
             }
+            // Tutup menu otomatis setelah klik untuk transisi bersih
             setTimeout(() => document.getElementById('iconDropdown').classList.remove('show'), 300);
         }
 
-        // Tutup jika klik di luar
+        // Tutup dropdown jika klik di area mana pun
         window.onclick = function(event) {
             if (!event.target.closest('.floating-container')) {
                 document.getElementById('iconDropdown').classList.remove('show');
             }
         }
 
+        // Navigasi Smooth Scroll
         function navTo(id) { 
-            document.getElementById(id).scrollIntoView({ behavior: 'smooth' }); 
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' }); 
+            }
         }
 
+        // Logika Kalkulator Investasi
         function updateCalc() {
             const modalAwal = parseFloat(document.getElementById('modalAwal').value) || 0;
             const jmlAnggota = parseFloat(document.getElementById('jmlAnggota').value) || 1;
@@ -257,6 +268,7 @@
             document.getElementById('totalModalLabel').innerText = formatter.format(totalModal).replace("IDR", "Rp");
         }
 
+        // Scroll Tracking untuk Aktifkan Menu Navigasi Bawah
         window.addEventListener('scroll', () => {
             const sections = document.querySelectorAll('section');
             const navItems = document.querySelectorAll('.nav-item');
@@ -268,6 +280,7 @@
             });
         });
 
+        // Jalankan kalkulator saat halaman dimuat
         window.onload = updateCalc;
     </script>
 </body>
